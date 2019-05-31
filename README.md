@@ -2,16 +2,19 @@
 
 A lightweight collection of helpful modelling functions for mixed integer programming. It is based around the cvxpy framework.
 
-The functions usually will return variables of interest and also new constraints to add in your constraint set. Don't forget to do that.
+The functions usually will return new variables and also new constraints to add in your constraint set. Don't forget to do that. We could (should?) automate this part by wrapping in more interface.
 
 
 ## Implemented
 
 
-## Not yet implemented
+## Not implemented
 * Embedding logical functions
 * Unions of convex shapes
 * Sums of Squares Programming
+* Smart Encodings
+* Piecewise Linear Functions
+* 
 
 
 ## Blog Posts
@@ -26,3 +29,7 @@ The functions usually will return variables of interest and also new constraints
 * https://github.com/joehuchette/PiecewiseLinearOpt.jl
 * https://github.com/rdeits/ConditionalJuMP.jl
 * https://github.com/stephane-caron/pypoman
+* https://github.com/sadraddini/PWA-Control
+* https://github.com/sadraddini/pypolycontain
+* https://github.com/JuliaOpt/SumOfSquares.jl
+* https://github.com/rdeits/Mayday.jl

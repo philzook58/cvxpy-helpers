@@ -1,0 +1,1 @@
+# Sympy + cvxpy = SOS
