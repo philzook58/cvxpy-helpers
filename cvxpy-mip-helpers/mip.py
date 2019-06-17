@@ -23,6 +23,19 @@ def circle(N):
         constraints += [l[i] <= segment[i] + segment[i+1]] # interpolation variables suppressed
     return x, y, constraints
 
+# one encoding for a relu
+# Another possible one is to use rays. lam(1,0) + (1-lam)(1,1) = (x,y)
+# https://arxiv.org/pdf/1711.07356.pdf
+def relu(x, M=100):
+    y = cvx.Variable(x.shape)
+    z = cvx.Variable(x.shape, boolean=True)
+    notz = 1 - z
+    constraints = []
+    constraints += [y >= 0, y >= x]
+    constraints += [x <= M * z,- M * notz <= x]
+    constraints += [y <= M * z, y <= x + 2 * M * notz]
+    return y, constraints
+
 def curveMIP(pts):
     d = pts.shape[1]
     N = pts.shape[0]
@@ -91,6 +104,8 @@ def mipify(f, arity=2, allowExtra = False):
         z = cvx.Variable(args[0].shape, boolean=True)
     return g
     '''
+
+
 
 andMIP = mipify(lambda a,b: a * b)
 orMIP = mipify(lambda a,b: max(a, b))
