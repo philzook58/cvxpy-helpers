@@ -116,7 +116,7 @@ print(andMIP)
 '''
 
 
-make mip pendulum using circle. Turns pendulum into a sequence of inlcined planes. Possibly a bvad approximation
+make mip pendulum using circle. Turns pendulum into a sequence of inlcined planes. Possibly a bad approximation
 The SHO oscillator sine apporixmation at the stable point is replaced with peicewise parabolas. you could do worse. Although.. piecewise parabolas in cartesian space?
 
 rather than circle
@@ -134,6 +134,51 @@ def suppressedPair(N):
     z = cvx.Variable(N, boolean=True)
     constraints = [0 <= l, l <= z]
     return l, z, constraints
+
+
+# curve_mip is union of segments. Vrep of a segment is just 2 points.
+
+
+def union_of_vrep(vreps):
+    nshapes = len(vreps)
+    c = []
+    indicators = cvx.Variable(nshapes, boolean=True)
+    c += [cvx.sum(indicators) == 1] # in exactly 1
+    xs = []
+    for i,vrep in enumerate(vreps):
+        (verts, d) = vrep.shape 
+        coordinates = cvx.Variables(verts)
+        c += [coordinates >= 0, coordinates <= indicator[i]]
+        xs.append(coordinates * vrep)
+    x = cvx.Variable(d)
+    c += [sum(xs) == x]
+    return x, c
+
+
+#what happened to reify?
+# ctx is constraints built so far. We need to this to compute big M.
+# and really it would be nice (vital?) to turn off boolean
+def reify_halfplane(p, ctx): 
+    pass
+
+class PolyRel():
+    # list of integers
+    from : List[Int]
+    to   : List[Int]
+    vars : List[cvx.Variables] # maybe the from to lists should just be these.
+    constraints = List[Cvx.Expr] ?
+
+    def compose(self, ):
+    def converse(self, ):
+    def complement(self):
+    def __rdiv__()
+    def __rmul__(self,r):
+        sefl.compose(r)
+    def union(self,r):
+    def intersect(self,r):
+    def query_sub(self,r):
+        return prob
+    def 
 
 
 '''
