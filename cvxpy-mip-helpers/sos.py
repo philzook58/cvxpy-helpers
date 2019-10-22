@@ -6,11 +6,15 @@ The idea is to use raw cvxpy and sympy as much as possible for maximum flexibili
 
 Construct a sum of sqaures polynomial using sospoly. This returns a variable dictionary mapping sympy variables to cvxpy variables.
 You are free to the do polynomial operations (differentiation, integration, algerba) in pure sympy
-When you want to express an equality constraint, use poly_eq(), which takes the vardict and returns a cvxpy expression
+When you want to express an equality constraint, use poly_eq(), which takes the vardict and returns a list of cvxpy constraints.
 Once the problem is solved, use poly_value to get back the solution polynomials.
 
-That some polynomial is sum of squares can be expressed as the equality with a new polynomial that is explicility sum of sqaures.
+That some polynomial is sum of squares can be expressed as the equality with a fresh polynomial that is explicility sum of sqaures.
 
+With the approach, we get the full unbridled power of sympy (including grobner bases!)
+
+I prefer manually controlling the vardict to having it auto controlled by a class, just as a I prefer manually controlling my constraint sets
+Classes suck.
 '''
 
 
